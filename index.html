@@ -4,18 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu site</title>
-    <link href="style.css" rel="stylesheet" />
+    <title>Fit — Sua vida fitness em um só app</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="assets/js/script.js" defer></script>
 </head>
 
 <body>
+    <header class="site-header">
+        <a class="logo" href="#inicio" aria-label="Fit — página inicial">F</a>
+        <a class="download-button" href="#download">Download</a>
+    </header>
 
 
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero__headline">
+                <h1>O app perfeito para acompanhar sua vida fitness.</h1>
+            </div>
 
+            <div class="hero__app-preview">
+                <img src="assets/images/print_1.png" alt="Tela de resumo do aplicativo Fit">
+            </div>
+
+            <div class="hero__highlights" aria-label="Principais recursos do aplicativo">
+                <ul>
+                    <li><a href="#saude"><span aria-hidden="true">❤️</span> Saúde</a></li>
+                    <li><a href="#exercicios"><span aria-hidden="true">🏃</span> Exercícios</a></li>
+                    <li><a href="#amigos"><span aria-hidden="true">👥</span> Amigos</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="features" id="funcionalidades">
+            <div class="features__inner">
+                <div class="section-heading">
+                    <span>Funcionalidades</span>
+                    <h2>Seu progresso, do seu jeito.</h2>
+                </div>
+
+                <article class="feature" id="saude">
+                    <div class="feature__visual">
+                        <img src="assets/images/print_2.png" alt="Tela para definir uma meta diária de calorias">
+                    </div>
+                    <div class="feature__content">
+                        <span class="feature__number">01</span>
+                        <h3>Metas que acompanham seu ritmo</h3>
+                        <p>Defina sua meta diária de calorias e ajuste seus objetivos conforme a sua rotina muda.</p>
+                        <p>Em dias mais leves ou mais intensos, você pode adaptar o objetivo de movimento e manter uma
+                            referência clara para acompanhar seu progresso.</p>
+                    </div>
+                </article>
+
+                <article class="feature feature--reverse" id="exercicios">
+                    <div class="feature__visual">
+                        <img src="assets/images/print_3.png"
+                            alt="Tela com opções de caminhada, corrida e treino de força">
+                    </div>
+                    <div class="feature__content">
+                        <span class="feature__number">02</span>
+                        <h3>Exercícios para cada momento</h3>
+                        <p>Escolha entre caminhada, corrida, musculação e outras atividades para manter seu corpo em
+                            movimento.</p>
+                        <p>Encontre rapidamente a modalidade que combina com o seu dia e organize diferentes tipos de
+                            treino em um único lugar.</p>
+                    </div>
+                </article>
+
+                <article class="feature" id="amigos">
+                    <div class="feature__visual">
+                        <img src="assets/images/print_4.png" alt="Tela de compartilhamento de atividades com amigos">
+                    </div>
+                    <div class="feature__content">
+                        <span class="feature__number">03</span>
+                        <h3>Conquistas ficam melhores em grupo</h3>
+                        <p>Compartilhe suas atividades, acompanhe o progresso dos amigos e celebre cada nova conquista.
+                        </p>
+                        <p>Visualize os círculos de atividade de quem treina com você e transforme a evolução de cada
+                            pessoa em motivação para todo o grupo.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta" id="download">
+            <div class="cta__inner">
+                <h2>Comece hoje a cuidar da sua melhor versão.</h2>
+                <button class="cta__button" type="button">Download</button>
+                <p>Totalmente gratuito</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Todos os direitos reservados</p>
+    </footer>
 </body>
 
 </html>
