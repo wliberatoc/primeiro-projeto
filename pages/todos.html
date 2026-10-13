@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Organize suas tarefas fitness de forma simples.">
+    <title>Minhas tarefas | Fit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <script src="../assets/js/script.js" defer></script>
+</head>
+
+<body class="todo-page">
+    <header class="site-header">
+        <a class="logo" href="../index.html" aria-label="Fit — página inicial">F</a>
+        <div class="header-actions">
+            <a class="header-link" href="../index.html">Início</a>
+            <a class="header-link" href="todos.html" aria-current="page">Todos</a>
+            <a class="download-button" href="../index.html#download">Download</a>
+        </div>
+    </header>
+
+    <main class="todo-main">
+        <section class="todo-heading" aria-labelledby="todo-title">
+            <span>Organize seu dia</span>
+            <h1 id="todo-title">Minhas tarefas</h1>
+            <p>Adicione suas atividades e marque cada conquista ao longo do dia.</p>
+        </section>
+
+        <section class="todo-card todo-card--form" aria-labelledby="new-task-title">
+            <h2 id="new-task-title">Nova tarefa</h2>
+            <form class="todo-form" id="todo-form">
+                <label class="visually-hidden" for="todo-input">Descreva uma nova tarefa</label>
+                <input id="todo-input" name="task" type="text" placeholder="Ex.: Caminhar por 30 minutos"
+                    maxlength="120" autocomplete="off" required>
+                <button type="submit">Adicionar</button>
+            </form>
+        </section>
+
+        <section class="todo-card todo-card--list" aria-labelledby="task-list-title">
+            <div class="todo-list-header">
+                <h2 id="task-list-title">Sua lista</h2>
+                <p id="todo-count" aria-live="polite">0 tarefas</p>
+            </div>
+
+            <p class="todo-empty" id="todo-empty">Nenhuma tarefa por aqui. Adicione a primeira!</p>
+            <ul class="todo-list" id="todo-list" aria-label="Lista de tarefas"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>
