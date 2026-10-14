@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fit — Sua vida fitness em um só app</title>
+    <meta name="description" content="Pesquise e descubra repositórios públicos no GitHub.">
+    <title>Buscar repositórios | Fit</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
@@ -12,19 +13,41 @@
     <script src="../assets/js/script.js" defer></script>
 </head>
 
-<body>
+<body class="app-page repository-page">
     <header class="site-header">
         <a class="logo" href="../index.html" aria-label="Fit — página inicial">F</a>
         <div class="header-actions">
-            <a class="header-link" href="todos.html">Todos</a>
+            <a class="header-link" href="todos.html">To-Do</a>
             <a class="header-link" href="planos.html" aria-current="page">Planos</a>
             <a class="download-button" href="../index.html#download">Download</a>
         </div>
     </header>
 
 
-    <main>
-        
+    <main class="content-main repository-main">
+        <section class="page-heading" aria-labelledby="repository-title">
+            <span>Explore projetos</span>
+            <h1 id="repository-title">Busque repositórios no GitHub</h1>
+            <p>Digite uma palavra-chave e pressione Enter para encontrar projetos públicos ordenados por estrelas.</p>
+        </section>
+
+        <section class="card repository-search-card" aria-labelledby="search-title">
+            <h2 id="search-title">O que você quer encontrar?</h2>
+            <form class="inline-form repository-form" id="repository-form">
+                <label class="visually-hidden" for="repository-input">Palavra-chave para buscar repositórios</label>
+                <input id="repository-input" name="query" type="search"
+                    placeholder="Ex.: JavaScript, acessibilidade, fitness" maxlength="256" autocomplete="off" required>
+            </form>
+            <p class="form-hint">Pressione Enter para pesquisar.</p>
+        </section>
+
+        <section class="repository-results" aria-labelledby="results-title">
+            <h2 class="visually-hidden" id="results-title">Resultados da busca</h2>
+            <p class="card status-message" id="repository-status" role="status" aria-live="polite">
+                Digite um termo para começar sua busca.
+            </p>
+            <ul class="repository-list" id="repository-list" aria-label="Repositórios encontrados"></ul>
+        </section>
     </main>
 
     <footer class="site-footer">

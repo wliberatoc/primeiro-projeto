@@ -111,3 +111,144 @@ if (todoForm && todoInput && todoList && todoEmpty && todoCount) {
 
     renderTasks();
 }
+
+const repositoryForm = document.querySelector('#repository-form');
+const repositoryInput = document.querySelector('#repository-input');
+const repositoryList = document.querySelector('#repository-list');
+const repositoryStatus = document.querySelector('#repository-status');
+
+if (repositoryForm && repositoryInput && repositoryList && repositoryStatus) {
+    const starFormatter = new Intl.NumberFormat('pt-BR');
+    let activeRequest;
+
+    function showRepositoryStatus(message, state = '') {
+        repositoryStatus.textContent = message;
+        repositoryStatus.className = 'card status-message';
+        repositoryStatus.classList.toggle('is-loading', state === 'loading');
+        repositoryStatus.classList.toggle('is-error', state === 'error');
+        repositoryStatus.hidden = false;
+    }
+
+    function createRepositoryCard(repository) {
+        const card = document.createElement('li');
+        const author = document.createElement('div');
+        const avatar = document.createElement('img');
+        const authorName = document.createElement('span');
+        const title = document.createElement('h3');
+        const titleLink = document.createElement('a');
+        const description = document.createElement('p');
+        const metadata = document.createElement('ul');
+        const language = document.createElement('li');
+        const stars = document.createElement('li');
+        const repositoryLink = document.createElement('a');
+
+        card.className = 'card repository-card';
+        author.className = 'repository-author';
+        avatar.src = repository.owner.avatar_url;
+        avatar.alt = `Foto de ${repository.owner.login}`;
+        avatar.width = 40;
+        avatar.height = 40;
+        avatar.loading = 'lazy';
+        authorName.textContent = repository.owner.login;
+
+        titleLink.href = repository.html_url;
+        titleLink.target = '_blank';
+        titleLink.rel = 'noopener noreferrer';
+        titleLink.textContent = repository.name;
+
+        description.className = 'repository-description';
+        description.textContent = repository.description || 'Sem descrição disponível.';
+
+        metadata.className = 'repository-meta';
+        language.textContent = repository.language || 'Linguagem não informada';
+        stars.textContent = `★ ${starFormatter.format(repository.stargazers_count)} estrelas`;
+
+        repositoryLink.className = 'repository-link';
+        repositoryLink.href = repository.html_url;
+        repositoryLink.target = '_blank';
+        repositoryLink.rel = 'noopener noreferrer';
+        repositoryLink.textContent = 'Ver repositório no GitHub ↗';
+        repositoryLink.setAttribute('aria-label', `Abrir ${repository.name} no GitHub em uma nova aba`);
+
+        author.append(avatar, authorName);
+        title.append(titleLink);
+        metadata.append(language, stars);
+        card.append(author, title, description, metadata, repositoryLink);
+
+        return card;
+    }
+
+    function renderRepositories(repositories) {
+        const fragment = document.createDocumentFragment();
+
+        repositories.forEach((repository) => {
+            fragment.append(createRepositoryCard(repository));
+        });
+
+        repositoryList.replaceChildren(fragment);
+        repositoryStatus.hidden = true;
+    }
+
+    async function searchRepositories(query) {
+        if (activeRequest) activeRequest.abort();
+
+        const request = new AbortController();
+        activeRequest = request;
+        repositoryList.replaceChildren();
+        repositoryList.setAttribute('aria-busy', 'true');
+        showRepositoryStatus(`Buscando repositórios para “${query}”...`, 'loading');
+
+        const endpoint = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=10`;
+
+        try {
+            const response = await fetch(endpoint, {
+                headers: {
+                    Accept: 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2026-03-10'
+                },
+                signal: request.signal
+            });
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    throw new Error('O limite de buscas do GitHub foi atingido. Aguarde alguns minutos e tente novamente.');
+                }
+
+                throw new Error(`Não foi possível concluir a busca (erro ${response.status}).`);
+            }
+
+            const data = await response.json();
+
+            if (data.items.length === 0) {
+                showRepositoryStatus(`Nenhum repositório foi encontrado para “${query}”. Tente outro termo.`);
+                return;
+            }
+
+            renderRepositories(data.items);
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                showRepositoryStatus(
+                    error.message || 'Não foi possível buscar os repositórios. Tente novamente.',
+                    'error'
+                );
+            }
+        } finally {
+            if (activeRequest === request) {
+                repositoryList.setAttribute('aria-busy', 'false');
+            }
+        }
+    }
+
+    repositoryForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = repositoryInput.value.trim();
+
+        if (!query) {
+            showRepositoryStatus('Digite uma palavra-chave antes de pesquisar.', 'error');
+            repositoryInput.focus();
+            return;
+        }
+
+        searchRepositories(query);
+    });
+}

@@ -13,27 +13,26 @@
     <script src="../assets/js/script.js" defer></script>
 </head>
 
-<body class="todo-page">
+<body class="app-page todo-page">
     <header class="site-header">
         <a class="logo" href="../index.html" aria-label="Fit — página inicial">F</a>
         <div class="header-actions">
-            <a class="header-link" href="../index.html">Início</a>
-            <a class="header-link" href="todos.html" aria-current="page">Todos</a>
+            <a class="header-link" href="todos.html" aria-current="page">To-Do</a>
             <a class="header-link" href="planos.html">Planos</a>
             <a class="download-button" href="../index.html#download">Download</a>
         </div>
     </header>
 
-    <main class="todo-main">
-        <section class="todo-heading" aria-labelledby="todo-title">
+    <main class="content-main todo-main">
+        <section class="page-heading todo-heading" aria-labelledby="todo-title">
             <span>Organize seu dia</span>
             <h1 id="todo-title">Minhas tarefas</h1>
             <p>Adicione suas atividades e marque cada conquista ao longo do dia.</p>
         </section>
 
-        <section class="todo-card todo-card--form" aria-labelledby="new-task-title">
+        <section class="card todo-card todo-card--form" aria-labelledby="new-task-title">
             <h2 id="new-task-title">Nova tarefa</h2>
-            <form class="todo-form" id="todo-form">
+            <form class="inline-form todo-form" id="todo-form">
                 <label class="visually-hidden" for="todo-input">Descreva uma nova tarefa</label>
                 <input id="todo-input" name="task" type="text" placeholder="Ex.: Caminhar por 30 minutos"
                     maxlength="120" autocomplete="off" required>
@@ -41,7 +40,7 @@
             </form>
         </section>
 
-        <section class="todo-card todo-card--list" aria-labelledby="task-list-title">
+        <section class="card todo-card todo-card--list" aria-labelledby="task-list-title">
             <div class="todo-list-header">
                 <h2 id="task-list-title">Sua lista</h2>
                 <p id="todo-count" aria-live="polite">0 tarefas</p>
